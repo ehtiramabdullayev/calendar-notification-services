@@ -7,10 +7,12 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.*;
-import com.notificationservices.domains.AttendanceModel;
-import com.notificationservices.domains.EventInputModel;
-import com.notificationservices.domains.EventOutputModel;
+import com.notificationservices.domains.AttendeeModel;
+import com.notificationservices.domains.EventModel;
+import com.notificationservices.domains.mapper.GeneralEventMapper;
 import com.notificationservices.service.EventServices;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -25,11 +27,14 @@ import static com.notificationservices.service.imp.LoginServicesImp.getCredentia
  * @author Ehtiram_Abdullayev on 17.12.2018
  * @project notificationservices
  */
-public class EventCreatorServicesImp implements EventServices {
+@Service
+public class EventServicesImp implements EventServices {
 
+    @Autowired
+    private GeneralEventMapper eventMapper;
 
     @Override
-    public String createEvent(EventInputModel eventInput) throws GeneralSecurityException, IOException{
+    public String createEvent(EventModel eventInput) throws GeneralSecurityException, IOException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Credential credential = getCredentials(HTTP_TRANSPORT);
 
@@ -39,35 +44,34 @@ public class EventCreatorServicesImp implements EventServices {
         event.setLocation(eventInput.getLocation());
         event.setDescription(eventInput.getDescription());
 
-        DateTime startDateTime = new DateTime("2015-05-28T09:00:00-07:00");
+        DateTime startDateTime = new DateTime("2018-05-28T09:00:00-07:00");
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
                 .setTimeZone("America/Los_Angeles");
         event.setStart(start);
 
         // will be out end date time
-        DateTime endDateTime = new DateTime("2015-05-28T17:00:00-07:00");
+        DateTime endDateTime = new DateTime("2019-05-28T17:00:00-07:00");
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime)
                 .setTimeZone("America/Los_Angeles");
         event.setEnd(end);
 
-        String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=2"};
+        String[] recurrence = new String[]{"RRULE:FREQ=DAILY;COUNT=2"};
         event.setRecurrence(Arrays.asList(recurrence));
 
-        EventAttendee[] attendees = new EventAttendee[] {
-                new EventAttendee().setEmail("lpage@example.com"),
-                new EventAttendee().setEmail("sbrin@example.com"),
-        };
-        //TODO - make this right !
-        List<EventAttendee> a = new ArrayList<>();
-        for (AttendanceModel attendance : eventInput.getAttendances()){
-            EventAttendee attendee = new EventAttendee();
-            attendee.setEmail(attendance.getEmail());
-        }
-//       eventInput.getAttendances().forEach(attendance -> a.add(attendance));
 
-        EventReminder[] reminderOverrides = new EventReminder[] {
+        //TODO - make this right !
+        //adding people to notice
+        List<EventAttendee> attendees = new ArrayList<>();
+        for (AttendeeModel attendeeModel : eventInput.getAttendances()) {
+            EventAttendee attendee = new EventAttendee();
+            attendee.setEmail(attendeeModel.getEmail());
+            attendees.add(attendee);
+        }
+        event.setAttendees(attendees);
+
+        EventReminder[] reminderOverrides = new EventReminder[]{
                 new EventReminder().setMethod("email").setMinutes(24 * 60),
                 new EventReminder().setMethod("popup").setMinutes(10),
         };
@@ -88,7 +92,8 @@ public class EventCreatorServicesImp implements EventServices {
     }
 
     @Override
-    public List<EventOutputModel> getClientEvents() throws GeneralSecurityException, IOException {
+    public List<EventModel> getClientEvents() throws GeneralSecurityException, IOException {
+        List<EventModel> eventOutputModels = new ArrayList<>();
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Credential credential = getCredentials(HTTP_TRANSPORT);
         Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
@@ -104,22 +109,20 @@ public class EventCreatorServicesImp implements EventServices {
                 .setSingleEvents(true)
                 .execute();
         List<Event> items = events.getItems();
+
         if (items.isEmpty()) {
-            System.out.println("No upcoming events found.");
         } else {
-            System.out.println("Upcoming events");
             for (Event event : items) {
                 DateTime start = event.getStart().getDateTime();
                 if (start == null) {
                     start = event.getStart().getDate();
                 }
-                System.out.printf("%s (%s)\n", event.getSummary(), start);
-
-                return null;
+                EventModel outputModel = eventMapper.toEventModel(event);
+                eventOutputModels.add(outputModel);
             }
         }
 
-    return null;
+        return eventOutputModels;
     }
 
 

@@ -3,7 +3,17 @@
   <component name="issues">
     <option name="index">
       <map>
+        <entry key="/Dummy.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Desktop/weatherApp/weatherapp/weather-data/src/main/java/com/weather/data/model/entity/mapper/GeneralWeatherMapper.java">
           <value>
             <set />
           </value>
@@ -33,7 +43,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/notificationservices/controllers/EventController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/notificationservices/domains/AttendanceModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/notificationservices/domains/AttendeeModel.java">
           <value>
             <set />
           </value>
@@ -43,7 +63,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/notificationservices/domains/EventModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/notificationservices/domains/EventOutputModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/notificationservices/domains/mapper/GeneralEventMapper.java">
           <value>
             <set />
           </value>
@@ -59,6 +89,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/notificationservices/service/imp/EventCreatorServicesImp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/notificationservices/service/imp/EventServicesImp.java">
           <value>
             <set />
           </value>
@@ -224,6 +259,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/service/imp/LoginServicesImp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/resources/application.properties">
           <value>
             <set />
           </value>

@@ -2,8 +2,8 @@ package com.notificationservices.service;
 
 
 
-import com.notificationservices.domains.EventInputModel;
-import com.notificationservices.domains.EventOutputModel;
+import com.notificationservices.domains.EventModel;
+import com.notificationservices.domains.EventModel;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -14,6 +14,6 @@ import java.util.List;
  * @project notificationservices
  */
 public interface EventServices {
-    public String createEvent(EventInputModel eventInput) throws GeneralSecurityException, IOException;
-    public List<EventOutputModel> getClientEvents() throws GeneralSecurityException, IOException;
+    public String createEvent(EventModel eventInput) throws GeneralSecurityException, IOException;
+    public List<EventModel> getClientEvents() throws GeneralSecurityException, IOException;
 }
