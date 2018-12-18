@@ -25,6 +25,9 @@ public class EventController {
         return eventServices.getClientEvents();
     }
 
-
+    @PostMapping(value = "/createEvent")
+    public EventModel createEvent(@RequestBody EventModel eventModel) throws GeneralSecurityException, IOException {
+        return eventServices.createEvent(eventModel);
+    }
 
 }

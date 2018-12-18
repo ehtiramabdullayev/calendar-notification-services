@@ -34,9 +34,15 @@ public class EventServicesImp implements EventServices {
     private GeneralEventMapper eventMapper;
 
     @Override
-    public String createEvent(EventModel eventInput) throws GeneralSecurityException, IOException {
+    public EventModel createEvent(EventModel eventInput) throws GeneralSecurityException, IOException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Credential credential = getCredentials(HTTP_TRANSPORT);
+        //TODO smelly code down! fix it asap !
+//        if(credential.getAccessToken() == null){
+//            EventModel model = new EventModel();
+//            model.setDescription(credential.getTokenServerEncodedUrl());
+//            return model;
+//        }
 
 
         Event event = new Event();
@@ -44,19 +50,24 @@ public class EventServicesImp implements EventServices {
         event.setLocation(eventInput.getLocation());
         event.setDescription(eventInput.getDescription());
 
-        DateTime startDateTime = new DateTime("2018-05-28T09:00:00-07:00");
-        EventDateTime start = new EventDateTime()
-                .setDateTime(startDateTime)
-                .setTimeZone("America/Los_Angeles");
-        event.setStart(start);
+        //this is event starting time!
+        if(eventInput.getStart()!=null){
+            DateTime startDateTime = new DateTime(eventInput.getStart().getDateTime());
+            EventDateTime start = new EventDateTime()
+                    .setDateTime(startDateTime)
+                    .setTimeZone(eventInput.getStart().getTimeZone());
+            event.setStart(start);
+        }
+
 
         // will be out end date time
-        DateTime endDateTime = new DateTime("2019-05-28T17:00:00-07:00");
-        EventDateTime end = new EventDateTime()
-                .setDateTime(endDateTime)
-                .setTimeZone("America/Los_Angeles");
-        event.setEnd(end);
-
+        if(eventInput.getEnd()!=null) {
+            DateTime endDateTime = new DateTime(eventInput.getEnd().getDateTime());
+            EventDateTime end = new EventDateTime()
+                    .setDateTime(endDateTime)
+                    .setTimeZone(eventInput.getEnd().getTimeZone());
+            event.setEnd(end);
+        }
         String[] recurrence = new String[]{"RRULE:FREQ=DAILY;COUNT=2"};
         event.setRecurrence(Arrays.asList(recurrence));
 
@@ -64,12 +75,15 @@ public class EventServicesImp implements EventServices {
         //TODO - make this right !
         //adding people to notice
         List<EventAttendee> attendees = new ArrayList<>();
-        for (AttendeeModel attendeeModel : eventInput.getAttendances()) {
-            EventAttendee attendee = new EventAttendee();
-            attendee.setEmail(attendeeModel.getEmail());
-            attendees.add(attendee);
+        if(eventInput.getAttendances()!=null){
+            for (AttendeeModel attendeeModel : eventInput.getAttendances()) {
+                EventAttendee attendee = new EventAttendee();
+                attendee.setEmail(attendeeModel.getEmail());
+                attendees.add(attendee);
+            }
+            event.setAttendees(attendees);
+
         }
-        event.setAttendees(attendees);
 
         EventReminder[] reminderOverrides = new EventReminder[]{
                 new EventReminder().setMethod("email").setMinutes(24 * 60),
@@ -88,7 +102,9 @@ public class EventServicesImp implements EventServices {
                 .build();
         event = service.events().insert(calendarId, event).execute();
 
-        return "OK";
+        EventModel outputEvent = eventMapper.toEventModel(event);
+
+        return outputEvent;
     }
 
     @Override

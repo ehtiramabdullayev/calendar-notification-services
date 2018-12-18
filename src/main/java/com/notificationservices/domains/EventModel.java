@@ -1,5 +1,6 @@
 package com.notificationservices.domains;
 
+
 import java.util.List;
 
 /**
@@ -15,7 +16,8 @@ public class EventModel {
 
 
     private String colorId;
-    //    private EventDateTime end;
+    private EventDateTimeModel start;
+    private EventDateTimeModel end;
     private Boolean endTimeUnspecified;
     private String etag;
     private Boolean guestsCanInviteOthers;
@@ -35,7 +37,6 @@ public class EventModel {
     //    private Event.Reminders reminders;
     private Integer sequence;
     //    private Event.Source source;
-//    private EventDateTime start;
     private String status;
     //    private String summary;
     private String transparency;
@@ -226,5 +227,21 @@ public class EventModel {
 
     public void setVisibility(String visibility) {
         this.visibility = visibility;
+    }
+
+    public EventDateTimeModel getEnd() {
+        return end;
+    }
+
+    public void setEnd(EventDateTimeModel end) {
+        this.end = end;
+    }
+
+    public EventDateTimeModel getStart() {
+        return start;
+    }
+
+    public void setStart(EventDateTimeModel start) {
+        this.start = start;
     }
 }

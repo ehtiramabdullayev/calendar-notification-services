@@ -15,6 +15,7 @@ import com.notificationservices.service.LoginServices;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import static com.notificationservices.config.Utils.*;
@@ -27,7 +28,12 @@ public class LoginServicesImp implements LoginServices {
 
     private static Credential credentialInstance;
     private static final String  TOKENS_DIRECTORY_PATH = "tokens";
-    private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR_READONLY);
+    private static String[] scopeNames = {"https://www.googleapis.com/auth/calendar",
+            "https://www.googleapis.com/auth/calendar.readonly"
+    };
+    private static final List<String> SCOPES = Arrays.asList(scopeNames);
+
+
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
 

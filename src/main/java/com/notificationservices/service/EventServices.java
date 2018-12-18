@@ -14,6 +14,6 @@ import java.util.List;
  * @project notificationservices
  */
 public interface EventServices {
-    public String createEvent(EventModel eventInput) throws GeneralSecurityException, IOException;
+    public EventModel createEvent(EventModel eventInput) throws GeneralSecurityException, IOException;
     public List<EventModel> getClientEvents() throws GeneralSecurityException, IOException;
 }
