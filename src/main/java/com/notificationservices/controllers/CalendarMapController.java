@@ -38,6 +38,7 @@ public class CalendarMapController {
         for (EventModel event : eventServices.getClientEvents()){
             if(event.getId().equals(eventId)){
                 foundEvent = event;
+                break;
             }
         }
 
