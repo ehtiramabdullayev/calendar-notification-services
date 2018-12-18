@@ -12,8 +12,7 @@ public class EventModel {
     private String location;
     private String description;
 
-    private List<AttendeeModel> attendances;
-
+    private List<AttendeeModel> attendees;
 
     private String colorId;
     private EventDateTimeModel start;
@@ -68,14 +67,13 @@ public class EventModel {
         this.description = description;
     }
 
-    public List<AttendeeModel> getAttendances() {
-        return attendances;
+    public List<AttendeeModel> getAttendees() {
+        return attendees;
     }
 
-    public void setAttendances(List<AttendeeModel> attendances) {
-        this.attendances = attendances;
+    public void setAttendees(List<AttendeeModel> attendees) {
+        this.attendees = attendees;
     }
-
 
     public String getColorId() {
         return colorId;
@@ -244,4 +242,5 @@ public class EventModel {
     public void setStart(EventDateTimeModel start) {
         this.start = start;
     }
+
 }

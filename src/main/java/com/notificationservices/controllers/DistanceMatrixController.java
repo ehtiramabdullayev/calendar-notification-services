@@ -1,7 +1,7 @@
 package com.notificationservices.controllers;
 
 import com.notificationservices.domains.distance.DistanceResponse;
-import com.notificationservices.service.imp.DistanceMapServicesImp;
+import com.notificationservices.service.DistanceMapServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +18,7 @@ import java.security.GeneralSecurityException;
 @RestController
 public class DistanceMatrixController {
     @Autowired
-    private DistanceMapServicesImp distanceMapServicesImp;
+    private DistanceMapServices distanceMapServicesImp;
 
 
     @GetMapping(value = "/getDistance")

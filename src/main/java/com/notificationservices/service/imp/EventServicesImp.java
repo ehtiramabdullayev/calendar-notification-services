@@ -75,9 +75,12 @@ public class EventServicesImp implements EventServices {
         //TODO - make this right !
         //adding people to notice
         List<EventAttendee> attendees = new ArrayList<>();
-        if(eventInput.getAttendances()!=null){
-            for (AttendeeModel attendeeModel : eventInput.getAttendances()) {
+
+        if(eventInput.getAttendees()!=null){
+            for (AttendeeModel attendeeModel : eventInput.getAttendees()) {
+
                 EventAttendee attendee = new EventAttendee();
+
                 attendee.setEmail(attendeeModel.getEmail());
                 attendees.add(attendee);
             }

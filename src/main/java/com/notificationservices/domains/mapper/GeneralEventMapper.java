@@ -21,14 +21,17 @@ public interface GeneralEventMapper {
 
     EventModel toEventModel(Event event);
 
+    EventAttendee toEvent(AttendeeModel attendeeModel);
+
     AttendeeModel toEventAttendeeModel(EventAttendee eventAttendee);
 
     default EventDateTimeModel toEventDateTimeModel(EventDateTime eventDateTime) {
-
         EventDateTimeModel eventDateTimeModel = new EventDateTimeModel();
         if (eventDateTime.getDateTime() != null)
             eventDateTimeModel.setDateTime(eventDateTime.getDateTime().toStringRfc3339());
         eventDateTimeModel.setTimeZone(eventDateTime.getTimeZone());
         return eventDateTimeModel;
     }
+
+
 }
