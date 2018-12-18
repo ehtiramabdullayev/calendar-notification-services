@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 @Service
 public class DistanceMapServicesImp implements DistanceMapServices {
-    private static final String API_KEY = "AIzaSyAkheqmcI9hRZo2g9pIxgmGaB4j3P5liug";
+    private static final String API_KEY = "";
     private static final String BASE_URI = "https://maps.googleapis.com/maps/api/distancematrix/json?";
 
 
