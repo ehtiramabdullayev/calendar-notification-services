@@ -1,22 +1,33 @@
-//package com.notificationservices.config;
-//
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.ComponentScan;
-//import org.springframework.context.annotation.Configuration;
-//
-///**
-// * @author Ehtiram_Abdullayev on 17.12.2018
-// * @project notificationservices
-// */
-//@Configuration
-//@ComponentScan("com.notificationservices.config")
-//public class AppConfig {
-//
-//    @Bean
-//    public ObjectMapper objectMapper() {
-//        return new ObjectMapper();
-//    }
-//
-//
-//}
+package com.notificationservices.config;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+
+/**
+ * @author Ehtiram_Abdullayev on 17.12.2018
+ * @project notificationservices
+ */
+@Configuration
+@ComponentScan("com.notificationservices.config")
+public class AppConfig {
+    @Bean
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+
+        converter.setObjectMapper(new com.fasterxml.jackson.databind.ObjectMapper());
+        converter.setSupportedMediaTypes(Arrays.asList(MediaType.ALL));
+        restTemplate.getMessageConverters().add(converter);
+
+        return restTemplate;
+    }
+
+
+}

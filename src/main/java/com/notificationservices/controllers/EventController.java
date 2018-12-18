@@ -26,8 +26,8 @@ public class EventController {
     }
 
     @GetMapping(value = "/getEventById")
-    public EventModel getEventById() throws GeneralSecurityException, IOException {
-        return eventServices.getClientEvents().stream().findFirst().get();
+    public EventModel getEventById(@RequestParam("eventId") String eventId) throws GeneralSecurityException, IOException {
+        return eventServices.getClientEvents().stream().findFirst().filter(eventModel -> eventModel.getId().equals(eventId)).get();
     }
 
 
