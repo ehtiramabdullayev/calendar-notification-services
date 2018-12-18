@@ -1,6 +1,5 @@
 package com.notificationservices.controllers;
 
-import com.google.api.services.calendar.model.EventDateTime;
 import com.notificationservices.domains.EventMapResult;
 import com.notificationservices.domains.EventModel;
 import com.notificationservices.domains.distance.DistanceResponse;
@@ -33,17 +32,8 @@ public class CalendarMapController {
                                                   @RequestParam(value = "mode") String mode) throws GeneralSecurityException, IOException {
         EventMapResult eventMapResult = new EventMapResult();
 
-        EventModel foundEvent = null;
-
-        for (EventModel event : eventServices.getClientEvents()){
-            if(event.getId().equals(eventId)){
-                foundEvent = event;
-                break;
-            }
-        }
-
+        EventModel foundEvent = eventServices.getClientEvents().stream().findFirst().filter(eventModel -> eventModel.getId().startsWith(eventId)).get();
         DistanceResponse distanceResponse = distanceMapServicesImp.distanceResponse(origins, foundEvent.getLocation(), mode);
-
         eventMapResult.setDistanceResponse(distanceResponse);
         eventMapResult.setSummary(foundEvent.getSummary());
         eventMapResult.setDescription(foundEvent.getDescription());

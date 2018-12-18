@@ -28,18 +28,12 @@ public class EventModel {
     private String id;
     private String kind;
     private Boolean locked;
-    //    private Event.Organizer organizer;
-//    private EventDateTime originalStartTime;
     private Boolean privateCopy;
     private List<String> recurrence;
     private String recurringEventId;
-    //    private Event.Reminders reminders;
     private Integer sequence;
-    //    private Event.Source source;
     private String status;
-    //    private String summary;
     private String transparency;
-    //    private DateTime updated;
     private String visibility;
 
 

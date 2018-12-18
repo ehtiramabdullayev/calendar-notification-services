@@ -38,12 +38,6 @@ public class EventServicesImp implements EventServices {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Credential credential = getCredentials(HTTP_TRANSPORT);
         //TODO smelly code down! fix it asap !
-//        if(credential.getAccessToken() == null){
-//            EventModel model = new EventModel();
-//            model.setDescription(credential.getTokenServerEncodedUrl());
-//            return model;
-//        }
-
 
         Event event = new Event();
         event.setSummary(eventInput.getSummary());
@@ -98,16 +92,13 @@ public class EventServicesImp implements EventServices {
         event.setReminders(reminders);
 
         String calendarId = "primary";
-        System.out.printf("Event created: %s\n", event.getHtmlLink());
-//        createEvent()
+
         Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
         event = service.events().insert(calendarId, event).execute();
 
-        EventModel outputEvent = eventMapper.toEventModel(event);
-
-        return outputEvent;
+        return  eventMapper.toEventModel(event);
     }
 
     @Override
@@ -129,8 +120,7 @@ public class EventServicesImp implements EventServices {
                 .execute();
         List<Event> items = events.getItems();
 
-        if (items.isEmpty()) {
-        } else {
+        if (!items.isEmpty()) {
             for (Event event : items) {
                 DateTime start = event.getStart().getDateTime();
                 if (start == null) {
