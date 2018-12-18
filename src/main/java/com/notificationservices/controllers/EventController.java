@@ -25,6 +25,12 @@ public class EventController {
         return eventServices.getClientEvents();
     }
 
+    @GetMapping(value = "/getEventById")
+    public EventModel getEventById() throws GeneralSecurityException, IOException {
+        return eventServices.getClientEvents().stream().findFirst().get();
+    }
+
+
     @PostMapping(value = "/createEvent")
     public EventModel createEvent(@RequestBody EventModel eventModel) throws GeneralSecurityException, IOException {
         return eventServices.createEvent(eventModel);
