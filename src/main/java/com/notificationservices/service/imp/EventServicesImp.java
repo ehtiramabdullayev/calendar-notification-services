@@ -45,7 +45,7 @@ public class EventServicesImp implements EventServices {
         event.setDescription(eventInput.getDescription());
 
         //this is event starting time!
-        if(eventInput.getStart()!=null){
+        if (eventInput.getStart() != null) {
             DateTime startDateTime = new DateTime(eventInput.getStart().getDateTime());
             EventDateTime start = new EventDateTime()
                     .setDateTime(startDateTime)
@@ -55,7 +55,7 @@ public class EventServicesImp implements EventServices {
 
 
         // will be out end date time
-        if(eventInput.getEnd()!=null) {
+        if (eventInput.getEnd() != null) {
             DateTime endDateTime = new DateTime(eventInput.getEnd().getDateTime());
             EventDateTime end = new EventDateTime()
                     .setDateTime(endDateTime)
@@ -70,7 +70,7 @@ public class EventServicesImp implements EventServices {
         //adding people to notice
         List<EventAttendee> attendees = new ArrayList<>();
 
-        if(eventInput.getAttendees()!=null){
+        if (eventInput.getAttendees() != null) {
             for (AttendeeModel attendeeModel : eventInput.getAttendees()) {
 
                 EventAttendee attendee = new EventAttendee();
@@ -98,7 +98,7 @@ public class EventServicesImp implements EventServices {
                 .build();
         event = service.events().insert(calendarId, event).execute();
 
-        return  eventMapper.toEventModel(event);
+        return eventMapper.toEventModel(event);
     }
 
     @Override

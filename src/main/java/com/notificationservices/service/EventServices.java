@@ -3,7 +3,6 @@ package com.notificationservices.service;
 
 
 import com.notificationservices.domains.EventModel;
-import com.notificationservices.domains.EventModel;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
