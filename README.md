@@ -14,4 +14,50 @@ third party APIs through the ```Apache HTTP``` client or the ```REST Client``` p
 party provider.
 
 ## Solution
-You need to create google cloud application first ( developers.google to create account and create project in google cloud)
+You need to create a simple cloud application first ( developers.google to create account and create project in google cloud), After that you'll need to download your credentials.json file
+
+
+![Pasted File at December 18, 2018 1_08 AM](https://user-images.githubusercontent.com/7686353/178112216-55487342-4fad-4468-a9b7-87f021fe0e9e.png)
+
+then you need to enable the ```Google Calender API``` and ```Distance Matrix API```
+
+![Pasted File at December 18, 2018 3_17 PM](https://user-images.githubusercontent.com/7686353/178112262-3c17be01-f879-415f-a36a-b72a379fc5a2.png)
+
+----------- 
+
+http://localhost:8282/getDistanceOfGivenEventById?eventId=cctoe6olq0hc3jl35rmq2ds95o&origins=Budapest,Hungary&mode=ride
+
+```json
+{
+  "summary": "Test 897987564",
+  "location": "Belgrade, Serbia",
+  "description": "Test 14 Rome",
+  "id": "cctoe6olq0hc3jl35rmq2ds95o_20181218T200000Z",
+  "distanceResponse": {
+    "status": "OK",
+    "rows": [
+      {
+        "elements": [
+          {
+            "duration": {
+              "text": "3 hours 46 mins",
+              "value": "13550"
+            },
+            "distance": {
+              "text": "379 km",
+              "value": "378532"
+            },
+            "status": "OK"
+          }
+        ]
+      }
+    ],
+    "origin_addresses": [
+      "Budapest, Hungary"
+    ],
+    "destination_addresses": [
+      "Belgrade, Serbia"
+    ]
+  }
+}
+```
