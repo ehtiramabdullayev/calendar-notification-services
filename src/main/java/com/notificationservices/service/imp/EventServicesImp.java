@@ -130,7 +130,6 @@ public class EventServicesImp implements EventServices {
                 eventOutputModels.add(outputModel);
             }
         }
-
         return eventOutputModels;
     }
 

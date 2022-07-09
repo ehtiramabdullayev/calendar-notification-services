@@ -19,12 +19,13 @@ import java.security.GeneralSecurityException;
  */
 @RestController
 public class CalendarMapController {
+    private final DistanceMapServices distanceMapServicesImp;
+    private final EventServices eventServices;
 
-    @Autowired
-    private DistanceMapServices distanceMapServicesImp;
-
-    @Autowired
-    private EventServices eventServices;
+    public CalendarMapController(DistanceMapServices distanceMapServicesImp, EventServices eventServices) {
+        this.distanceMapServicesImp = distanceMapServicesImp;
+        this.eventServices = eventServices;
+    }
 
     @GetMapping(value = "/getDistanceOfGivenEventById")
     public EventMapResult getDistanceOfGivenEvent(@RequestParam("eventId") String eventId,

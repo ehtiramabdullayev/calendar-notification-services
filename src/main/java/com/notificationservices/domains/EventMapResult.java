@@ -11,17 +11,13 @@ public class EventMapResult  {
     private String location;
     private String description;
     private String id;
-
     private DistanceResponse distanceResponse;
-
     public String getSummary() {
         return summary;
     }
-
     public void setSummary(String summary) {
         this.summary = summary;
     }
-
     public String getLocation() {
         return location;
     }

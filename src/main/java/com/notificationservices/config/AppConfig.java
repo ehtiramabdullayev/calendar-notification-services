@@ -8,6 +8,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @author Ehtiram_Abdullayev on 17.12.2018
@@ -22,7 +23,7 @@ public class AppConfig {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 
         converter.setObjectMapper(new com.fasterxml.jackson.databind.ObjectMapper());
-        converter.setSupportedMediaTypes(Arrays.asList(MediaType.ALL));
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
         restTemplate.getMessageConverters().add(converter);
 
         return restTemplate;

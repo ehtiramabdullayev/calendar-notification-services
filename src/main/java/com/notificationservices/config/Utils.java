@@ -9,9 +9,6 @@ import com.google.api.client.json.jackson2.JacksonFactory;
  * @project notificationservices
  */
 public class Utils {
-    private Utils() {
-    }
-
     public static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
     public static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 

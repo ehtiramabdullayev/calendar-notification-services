@@ -11,9 +11,7 @@ public class EventModel {
     private String summary;
     private String location;
     private String description;
-
     private List<AttendeeModel> attendees;
-
     private String colorId;
     private EventDateTimeModel start;
     private EventDateTimeModel end;
@@ -35,7 +33,6 @@ public class EventModel {
     private String status;
     private String transparency;
     private String visibility;
-
 
     public String getSummary() {
         return summary;
@@ -236,5 +233,4 @@ public class EventModel {
     public void setStart(EventDateTimeModel start) {
         this.start = start;
     }
-
 }

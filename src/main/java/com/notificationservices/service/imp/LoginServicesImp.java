@@ -24,18 +24,11 @@ public class LoginServicesImp implements LoginServices {
 
     private static Credential credentialInstance;
     private static final String  TOKENS_DIRECTORY_PATH = "tokens";
-    private static String[] scopeNames = {"https://www.googleapis.com/auth/calendar",
+    private static final String[] scopeNames = {"https://www.googleapis.com/auth/calendar",
                                           "https://www.googleapis.com/auth/calendar.readonly"
     };
     private static final List<String> SCOPES = Arrays.asList(scopeNames);
-
-
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
-
-
-    private LoginServicesImp(){
-
-    }
 
      public static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // Load client secrets.

@@ -17,9 +17,11 @@ import java.security.GeneralSecurityException;
 
 @RestController
 public class DistanceMatrixController {
-    @Autowired
-    private DistanceMapServices distanceMapServicesImp;
+    private final DistanceMapServices distanceMapServicesImp;
 
+    public DistanceMatrixController(DistanceMapServices distanceMapServicesImp) {
+        this.distanceMapServicesImp = distanceMapServicesImp;
+    }
 
     @GetMapping(value = "/getDistance")
     public DistanceResponse getResponse(@RequestParam(value = "origins") String origins,

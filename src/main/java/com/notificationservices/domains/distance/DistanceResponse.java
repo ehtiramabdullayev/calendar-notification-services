@@ -19,8 +19,6 @@ public class DistanceResponse {
     @JsonProperty("destination_addresses")
     private String[] destinationAddresses;
 
-
-
     private Rows[] rows;
 
     public String getStatus() {

@@ -16,9 +16,11 @@ import java.util.List;
 @RestController
 public class EventController {
 
-    @Autowired
-    private EventServices eventServices;
+    private final EventServices eventServices;
 
+    public EventController(EventServices eventServices) {
+        this.eventServices = eventServices;
+    }
 
     @GetMapping(value = "/getAllEvents")
     public List<EventModel> getAllEvents() throws GeneralSecurityException, IOException {
@@ -27,7 +29,10 @@ public class EventController {
 
     @GetMapping(value = "/getEventById")
     public EventModel getEventById(@RequestParam("eventId") String eventId) throws GeneralSecurityException, IOException {
-        return eventServices.getClientEvents().stream().findFirst().filter(eventModel -> eventModel.getId().startsWith(eventId)).get();
+        return eventServices.getClientEvents()
+                .stream()
+                .findFirst()
+                .filter(eventModel -> eventModel.getId().startsWith(eventId)).get();
     }
 
 

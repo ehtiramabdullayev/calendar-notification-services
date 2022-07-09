@@ -7,7 +7,6 @@ package com.notificationservices.domains;
 public class EventDateTimeModel {
     private String dateTime;
     private String timeZone;
-
     public String getDateTime() {
         return dateTime;
     }

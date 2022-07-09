@@ -7,7 +7,6 @@ package com.notificationservices.domains;
 public class AttendeeModel {
     private String name;
     private String email;
-
     public String getName() {
         return name;
     }

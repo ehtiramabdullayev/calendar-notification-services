@@ -7,5 +7,5 @@ import com.notificationservices.domains.distance.DistanceResponse;
  * @project notificationservices
  */
 public interface DistanceMapServices {
-    public DistanceResponse distanceResponse(String origins, String destinations, String mode);
+    DistanceResponse distanceResponse(String origins, String destinations, String mode);
 }
